@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
-
+// Este es el punto de entrada de laa app
 void main() {
   runApp(const EysfluisApp());
 }

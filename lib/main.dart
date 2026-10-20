@@ -10,7 +10,7 @@ class EysfluisApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const primaryBlue = Color(0xFF1E3A8A); // Azul Institucional
+    const primaryBlue = Color(0xFF3E3A8A); // Azul Institucional
     const secondaryTeal = Color(0xFF0D9488); // Teal
     const accentAmber = Color(0xFFF59E0B); // Ámbar
 

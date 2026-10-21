@@ -75,3 +75,5 @@ class EysfluisApp extends StatelessWidget {
 
 /// Alias para compatibilidad
 typedef Gym360App = EysfluisApp;
+
+// Esta buena esta app

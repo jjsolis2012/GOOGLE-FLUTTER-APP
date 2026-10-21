@@ -48,6 +48,7 @@ class Persona {
     }
   }
 
+  /// Crea una persona desde un mapa JSON, convirtiendo sus valores al tipo esperado.
   factory Persona.fromJson(Map<String, dynamic> json) {
     return Persona(
       idpersona: int.tryParse(json['idpersona']?.toString() ?? '') ?? 0,

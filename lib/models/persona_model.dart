@@ -27,6 +27,7 @@ class Persona {
       ? '$apellidos $nombres'.trim()
       : nombres;
 
+  /// Indica si la persona tiene asociado un identificador de cliente válido.
   bool get isCliente => idcliente != null && idcliente! > 0;
 
   int? get age {

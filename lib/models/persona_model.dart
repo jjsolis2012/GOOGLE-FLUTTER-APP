@@ -76,6 +76,7 @@ class Persona {
   }
 }
 
+/// Agrupa la persona junto con sus datos de contacto y características.
 class PersonaDetail {
   final Persona persona;
   final List<Correo> correos;

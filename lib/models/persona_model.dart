@@ -30,6 +30,7 @@ class Persona {
   /// Indica si la persona tiene asociado un identificador de cliente válido.
   bool get isCliente => idcliente != null && idcliente! > 0;
 
+  /// Calcula la edad; devuelve `null` si la fecha falta o no es válida.
   int? get age {
     if (fechanacimiento == null || fechanacimiento!.isEmpty) return null;
     try {

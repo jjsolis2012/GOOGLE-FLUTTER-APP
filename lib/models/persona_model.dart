@@ -37,6 +37,7 @@ class Persona {
       final birth = DateTime.parse(fechanacimiento!);
       final now = DateTime.now();
       int years = now.year - birth.year;
+      // Resta un año si el cumpleaños de este año todavía no ha llegado.
       if (now.month < birth.month ||
           (now.month == birth.month && now.day < birth.day)) {
         years--;

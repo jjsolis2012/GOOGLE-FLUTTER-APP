@@ -92,6 +92,7 @@ class PersonaDetail {
     required this.generos,
   });
 
+  /// Construye el detalle y convierte las colecciones recibidas desde JSON.
   factory PersonaDetail.fromJson(Map<String, dynamic> json) {
     final personaMap = (json['persona'] as Map<String, dynamic>?) ?? {};
     final persona = Persona.fromJson(personaMap);

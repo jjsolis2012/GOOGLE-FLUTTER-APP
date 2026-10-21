@@ -22,6 +22,7 @@ class Persona {
     this.idcliente,
   });
 
+  /// Combina apellidos y nombres para mostrar el nombre completo.
   String get nombreCompleto => '$apellidos $nombres'.trim().isNotEmpty
       ? '$apellidos $nombres'.trim()
       : nombres;

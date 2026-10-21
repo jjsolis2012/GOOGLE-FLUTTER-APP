@@ -105,6 +105,7 @@ class PersonaDetail {
     final rawDirecciones = json['direcciones'] as List<dynamic>? ?? [];
     final direcciones = rawDirecciones
         .map((d) => d['direccion']?.toString() ?? '')
+        // Omite valores vacíos para no exponer elementos sin dirección.
         .where((d) => d.isNotEmpty)
         .toList();
 

@@ -62,6 +62,7 @@ class Persona {
     );
   }
 // Prueba para comprobar Git
+  /// Serializa los datos de la persona con las claves esperadas por la API.
   Map<String, dynamic> toJson() {
     return {
       'idpersona': idpersona,

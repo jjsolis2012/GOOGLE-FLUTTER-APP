@@ -55,7 +55,7 @@ class Persona {
       idcliente: int.tryParse(json['idcliente']?.toString() ?? ''),
     );
   }
-
+// Prueba para comprobar Git
   Map<String, dynamic> toJson() {
     return {
       'idpersona': idpersona,

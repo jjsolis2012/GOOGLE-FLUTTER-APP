@@ -1,5 +1,6 @@
 import 'correo_model.dart';
 
+/// Representa los datos principales de una persona.
 class Persona {
   final int idpersona;
   final String cedula;

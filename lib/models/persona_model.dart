@@ -1,0 +1,133 @@
+import 'correo_model.dart';
+
+/// Representa los datos principales de una persona.
+class Persona {
+  final int idpersona;
+  final String cedula;
+  final String apellidos;
+  final String nombres;
+  final String? fechanacimiento;
+  final int? idsexo;
+  final String? sexoNombre;
+  final int? idcliente;
+
+  Persona({
+    required this.idpersona,
+    required this.cedula,
+    required this.apellidos,
+    required this.nombres,
+    this.fechanacimiento,
+    this.idsexo,
+    this.sexoNombre,
+    this.idcliente,
+  });
+
+  /// Combina apellidos y nombres para mostrar el nombre completo.
+  String get nombreCompleto => '$apellidos $nombres'.trim().isNotEmpty
+      ? '$apellidos $nombres'.trim()
+      : nombres;
+
+  /// Indica si la persona tiene asociado un identificador de cliente válido.
+  bool get isCliente => idcliente != null && idcliente! > 0;
+
+  /// Calcula la edad; devuelve `null` si la fecha falta o no es válida.
+  int? get age {
+    if (fechanacimiento == null || fechanacimiento!.isEmpty) return null;
+    try {
+      final birth = DateTime.parse(fechanacimiento!);
+      final now = DateTime.now();
+      int years = now.year - birth.year;
+      // Resta un año si el cumpleaños de este año todavía no ha llegado.
+      if (now.month < birth.month ||
+          (now.month == birth.month && now.day < birth.day)) {
+        years--;
+      }
+      return years >= 0 ? years : null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /// Crea una persona desde un mapa JSON, convirtiendo sus valores al tipo esperado.
+  factory Persona.fromJson(Map<String, dynamic> json) {
+    return Persona(
+      idpersona: int.tryParse(json['idpersona']?.toString() ?? '') ?? 0,
+      cedula: json['cedula']?.toString() ?? '',
+      apellidos: json['apellidos']?.toString() ?? '',
+      nombres: json['nombres']?.toString() ?? '',
+      fechanacimiento: json['fechanacimiento']?.toString(),
+      idsexo: int.tryParse(json['idsexo']?.toString() ?? ''),
+      sexoNombre: json['sexo_nombre']?.toString(),
+      idcliente: int.tryParse(json['idcliente']?.toString() ?? ''),
+    );
+  }
+// Prueba para comprobar Git
+  /// Serializa los datos de la persona con las claves esperadas por la API.
+  Map<String, dynamic> toJson() {
+    return {
+      'idpersona': idpersona,
+      'cedula': cedula,
+      'apellidos': apellidos,
+      'nombres': nombres,
+      'fechanacimiento': fechanacimiento,
+      'idsexo': idsexo,
+      'es_cliente': isCliente ? 1 : 0,
+    };
+  }
+}
+
+/// Agrupa la persona junto con sus datos de contacto y características.
+class PersonaDetail {
+  final Persona persona;
+  final List<Correo> correos;
+  final List<String> direcciones;
+  final List<String> estadosCiviles;
+  final List<String> generos;
+
+  PersonaDetail({
+    required this.persona,
+    required this.correos,
+    required this.direcciones,
+    required this.estadosCiviles,
+    required this.generos,
+  });
+
+  /// Construye el detalle y convierte las colecciones recibidas desde JSON.
+  factory PersonaDetail.fromJson(Map<String, dynamic> json) {
+    final personaMap = (json['persona'] as Map<String, dynamic>?) ?? {};
+    final persona = Persona.fromJson(personaMap);
+
+    final rawCorreos = json['correos'] as List<dynamic>? ?? [];
+    final correos = rawCorreos
+        .map((c) => Correo.fromJson(c as Map<String, dynamic>))
+        .toList();
+
+    final rawDirecciones = json['direcciones'] as List<dynamic>? ?? [];
+    final direcciones = rawDirecciones
+        .map((d) => d['direccion']?.toString() ?? '')
+        // Omite valores vacíos para no exponer elementos sin dirección.
+        .where((d) => d.isNotEmpty)
+        .toList();
+
+    final rawEC = json['estadosCiviles'] as List<dynamic>? ?? [];
+    final estadosCiviles = rawEC
+        .map((ec) => ec['estadocivil_nombre']?.toString() ?? '')
+        .where((ec) => ec.isNotEmpty)
+        .toList();
+
+    final rawGen = json['generos'] as List<dynamic>? ?? [];
+    final generos = rawGen
+        .map((g) => g['genero_nombre']?.toString() ?? '')
+        .where((g) => g.isNotEmpty)
+        .toList();
+
+    return PersonaDetail(
+      persona: persona,
+      correos: correos,
+      direcciones: direcciones,
+      estadosCiviles: estadosCiviles,
+      generos: generos,
+    );
+  }
+}
+// estoy aprendiendo 

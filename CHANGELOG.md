@@ -5,3 +5,4 @@ Navegacion entre pantallas
 Widgets reutilizables para la interfaz  
 Servicios de Google integrados  
 Dependencias actualizadas en pubspec  
+Correccion de errores de diseno en la vista principal  
